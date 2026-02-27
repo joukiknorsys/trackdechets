@@ -26,6 +26,8 @@ export enum TabId {
   worker = "worker",
   transporter = "transporter",
   destination = "destination",
+  operator = "operator",
+  detainer = "detainer",
   none = "none",
   other = "other"
 }
@@ -36,7 +38,7 @@ export type NormalizedError = {
   message: string;
 };
 
-export type SupportedBsdTypes = BsdType.Bsvhu | BsdType.Bspaoh | BsdType.Bsda;
+export type SupportedBsdTypes = BsdType.Bsvhu | BsdType.Bspaoh | BsdType.Bsda | BsdType.Bsff;
 
 export type TabError = {
   tabId: TabId;
@@ -97,6 +99,11 @@ export const getTabs = (
   if (bsdType === BsdType.Bsda) {
     return getBsdaTabs(commonsTabs, errorTabIds);
   }
+
+  if (bsdType === BsdType.Bsff) {
+    return getBsffTabs(commonsTabs, errorTabIds);
+  }
+
   return commonsTabs;
 };
 
@@ -140,6 +147,32 @@ const getBsdaTabs = (commonTabs, errorTabIds) => {
   return bsdaTabs;
 };
 
+
+const getBsffTabs = (commonTabs, errorTabIds) => {
+  const bsffTabs = [
+    {
+      ...commonTabs[0]
+    },
+    {
+      tabId: TabId.operator,
+      label: "Opérateur",
+      iconId: getTabClassName(errorTabIds, "operator")
+    },
+     {
+      tabId: TabId.detainer,
+      label: "Détenteur",
+      iconId: getTabClassName(errorTabIds, "detainer")
+    },
+    {
+      ...commonTabs[2]
+    },
+    {
+      ...commonTabs[3]
+    }
+  ];
+  return bsffTabs;
+};
+
 const pathPrefixToTab = {
   [BsdType.Bsvhu]: (pathPrefix: string): TabId | null => {
     if (
@@ -169,6 +202,15 @@ const pathPrefixToTab = {
     return null;
   },
   [BsdType.Bsda]: (pathPrefix: string): TabId | null => {
+    if (pathPrefix.startsWith("packagings")) {
+      return TabId.waste;
+    }
+    if (Object.values(TabId).includes(pathPrefix as TabId)) {
+      return TabId[pathPrefix];
+    }
+    return null;
+  },
+   [BsdType.Bsff]: (pathPrefix: string): TabId | null => {
     if (pathPrefix.startsWith("packagings")) {
       return TabId.waste;
     }

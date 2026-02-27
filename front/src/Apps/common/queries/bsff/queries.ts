@@ -63,3 +63,13 @@ export const PDF_BSFF_FORM = gql`
     }
   }
 `;
+
+export const PUBLISH_BSFF = gql`
+    mutation PublishBsff($id: ID!) {
+      publishBsff(id: $id) {
+        id
+        isDraft
+      }
+    }
+    ${FullBsffFragment}
+  `;

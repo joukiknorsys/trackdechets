@@ -240,4 +240,19 @@ type Mutation {
   Supprime un transporteur BSFF
   """
   deleteBsffTransporter("Identifiant du transporteur" id: ID!): ID!
+
+   """
+  Crée un Dentainer BSFF
+  """
+  createBsffDentainer(input: BsffDentainerInput!): BsffDentainer
+
+  """
+  Modifie un dententeur BSFF
+  """
+  updateBsffDentainer(id: ID!, input: BsffDentainerInput!): BsffDentainer
+
+  """
+  Supprime un detenteur BSFF
+  """
+  deleteBsffDentainer("Identifiant du dententeur" id: ID!): ID!
 }

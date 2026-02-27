@@ -153,7 +153,8 @@ describe("ActivityEvent.Bsda", () => {
           id: bsdaId,
           input: {
             waste: {
-              code: "06 13 04*"
+              code: "06 13 04*",
+              familyCode: "4"
             }
           }
         }
@@ -168,6 +169,7 @@ describe("ActivityEvent.Bsda", () => {
     });
     expect(bsdaAfterUpdate).toMatchObject(bsdaFromEventsAfterUpdate);
     expect(bsdaFromEventsAfterUpdate.wasteCode).toBe("06 13 04*");
+    expect(bsdaFromEventsAfterUpdate.wasteFamilyCode).toBe("4");
 
     const eventsAfterUpdate = await getStream(bsdaId);
     expect(eventsAfterUpdate.length).toBe(2);

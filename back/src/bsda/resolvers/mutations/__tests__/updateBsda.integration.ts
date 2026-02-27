@@ -2220,7 +2220,8 @@ describe("Mutation.updateBsda", () => {
         id: bsda.id,
         input: {
           waste: {
-            code: "06 13 04*"
+            code: "06 13 04*",
+            familyCode: "9"
           }
         }
       }
@@ -2234,6 +2235,8 @@ describe("Mutation.updateBsda", () => {
 
     expect(updateEvent).toBeDefined();
     expect(updateEvent?.data?.["wasteCode"]).toBe("06 13 04*");
+
+    expect(updateEvent?.data?.["wasteFamilyCode"]).toBe("9");
   });
 
   it("should be possible to update destination without erasing destination reception weight", async () => {

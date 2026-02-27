@@ -166,6 +166,37 @@ export const BsffTransporterFragment = gql`
   }
 `;
 
+export const BsffDetainerFragment = gql`
+  fragment BsffDetainerFragment on BsffDetainer {
+    id
+    company {
+      name
+      orgId
+      siret
+      address
+      country
+      contact
+      phone
+      mail
+      vatNumber
+      omiNumber
+    }
+    recepisse {
+      isExempted
+      number
+      validityLimit
+      department
+    }
+    transport {
+      mode
+      plates
+      signature {
+        date
+      }
+    }
+  }
+`;
+
 export const CREATE_BSFF_TRANSPORTER = gql`
   mutation CreateBsffTransporter($input: BsffTransporterInput!) {
     createBsffTransporter(input: $input) {
@@ -187,5 +218,30 @@ export const UPDATE_BSFF_TRANSPORTER = gql`
 export const DELETE_BSFF_TRANSPORTER = gql`
   mutation DeleteBsffTransporter($id: ID!) {
     deleteBsffTransporter(id: $id)
+  }
+`;
+
+
+export const CREATE_BSFF_DETAINER = gql`
+  mutation CreateBsffDetainer($input: BsffDetainerInput!) {
+    createBsffDetainer(input: $input) {
+      ...BsffDetainerFragment
+    }
+  }
+  ${BsffDetainerFragment}
+`;
+
+export const UPDATE_BSFF_DETAINER = gql`
+  mutation UpdateBsffDetainer($id: ID!, $input: BsffDetainerInput!) {
+    updateBsffDetainer(id: $id, input: $input) {
+      ...BsffDetainerFragment
+    }
+  }
+  ${BsffDetainerFragment}
+`;
+
+export const DELETE_BSFF_DETAINER = gql`
+  mutation DeleteBsffDetainer($id: ID!) {
+    deleteBsffDetainer(id: $id)
   }
 `;

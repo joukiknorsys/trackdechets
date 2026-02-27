@@ -12,6 +12,9 @@ import updateBsffPackaging from "./mutations/updateBsffPackaging";
 import createBsffTransporter from "./mutations/createBsffTransporter";
 import updateBsffTransporter from "./mutations/updateBsffTransporter";
 import deleteBsffTransporter from "./mutations/deleteBsffTransporter";
+import createBsffDentainer from "./mutations/createBsffDentainer";
+import updateBsffDentainer from "./mutations/updateBsffDentainer";
+import deleteBsffDentainer from "./mutations/deleteBsffDentainer";
 
 export const Mutation: MutationResolvers = {
   createBsff: createBsffResolver,
@@ -26,5 +29,8 @@ export const Mutation: MutationResolvers = {
   updateBsffPackaging,
   createBsffTransporter,
   updateBsffTransporter,
-  deleteBsffTransporter
+  deleteBsffTransporter,
+  createBsffDentainer,
+  updateBsffDentainer,
+  deleteBsffDentainer
 };
